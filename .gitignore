@@ -1,0 +1,36 @@
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Secrets & Environment Variables
+.env
+.env.local
+
+# Heavy AI Models, Datasets & CCTV Videos (NEVER commit to Git)
+*.pt
+*.pth
+*.onnx
+*.mp4
+*.avi
+*.mov
+*.mkv
+data/raw/
+
+# SUMO Simulation Logs & Outputs
+sim/outputs/*.xml
+sim/outputs/*.csv
+*.log
+
+# Databases & OS Junk
+*.db
+*.sqlite3
+.DS_Store
+Thumbs.db
