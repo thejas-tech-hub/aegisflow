@@ -1,0 +1,48 @@
+﻿{
+  "homography": {
+    "description": "4-point perspective transform from oblique CCTV road view (pixels) to Bird's-Eye View corridor (meters)",
+    "corridor_dimensions_meters": {
+      "width": 7.0,
+      "length": 50.0
+    },
+    "src_pixel_points": [
+      [420, 310],
+      [860, 310],
+      [1180, 680],
+      [120, 680]
+    ],
+    "dst_meter_points": [
+      [0.0, 50.0],
+      [7.0, 50.0],
+      [7.0, 0.0],
+      [0.0, 0.0]
+    ],
+    "point_order": ["top_left", "top_right", "bottom_right", "bottom_left"]
+  },
+  "vehicle_classes": {
+    "motorcycle": {
+      "footprint_area_m2": 1.6,
+      "pcu_weight": 0.5
+    },
+    "auto_rickshaw": {
+      "footprint_area_m2": 3.6,
+      "pcu_weight": 1.0
+    },
+    "car": {
+      "footprint_area_m2": 8.5,
+      "pcu_weight": 1.0
+    },
+    "bus": {
+      "footprint_area_m2": 27.5,
+      "pcu_weight": 3.0
+    },
+    "truck": {
+      "footprint_area_m2": 24.0,
+      "pcu_weight": 3.0
+    },
+    "ambulance": {
+      "footprint_area_m2": 10.5,
+      "pcu_weight": 1.2
+    }
+  }
+}
