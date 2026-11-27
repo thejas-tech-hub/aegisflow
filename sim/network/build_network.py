@@ -63,7 +63,7 @@ def find_netconvert() -> str:
             candidate = search_root / ("netconvert.exe" if os.name == "nt" else "netconvert")
             if candidate.exists():
                 return str(candidate)
-    except Exception:
+    except (ImportError, AttributeError, TypeError):
         pass
 
     # 4. Walk the venv's site-packages for a netconvert binary
@@ -106,7 +106,7 @@ def main() -> None:
     ]
 
     print(f"Running: {' '.join(cmd)}")
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
 
     if result.stdout:
         print(result.stdout)

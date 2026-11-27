@@ -1,0 +1,21 @@
+{
+  "seed": 42,
+  "baseline_evp": {
+    "controller": "Baseline EVP",
+    "ev_travel_time_s": 165.0,
+    "ev_halting_time_s": 16.0,
+    "ev_avg_speed_mps": 7.27,
+    "max_jb_queue_m": 164.61,
+    "spillback_steps": 0,
+    "total_shield_interventions": 15
+  },
+  "aegisflow": {
+    "controller": "AegisFlow",
+    "ev_travel_time_s": 161.0,
+    "ev_halting_time_s": 7.0,
+    "ev_avg_speed_mps": 7.44,
+    "max_jb_queue_m": 162.01,
+    "spillback_steps": 0,
+    "total_shield_interventions": 37
+  }
+}
