@@ -4,6 +4,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Inter"', "system-ui", "-apple-system", "sans-serif"],
+        display: ['"Space Grotesk"', '"Inter"', "sans-serif"],
+        mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
+      },
       colors: {
         command: {
           bg: "#090d16",
