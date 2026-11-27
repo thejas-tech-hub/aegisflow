@@ -1,11 +1,17 @@
 import {
   BarChart3,
+  Eye,
   GitFork,
   HelpCircle,
   Home,
 } from "lucide-react";
 
-export type NavTabId = "dashboard" | "analytics" | "corridor" | "help";
+export type NavTabId =
+  | "dashboard"
+  | "vision"
+  | "analytics"
+  | "corridor"
+  | "help";
 
 interface SidebarProps {
   activeTab: NavTabId;
@@ -19,6 +25,7 @@ const NAV_ITEMS: readonly {
   icon: typeof Home;
 }[] = [
   { id: "dashboard", label: "Dashboard", icon: Home },
+  { id: "vision", label: "Vision", icon: Eye },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
   { id: "corridor", label: "Corridor", icon: GitFork },
   { id: "help", label: "Help", icon: HelpCircle },

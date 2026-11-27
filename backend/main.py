@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Annotated, Any, Literal
@@ -11,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict
 
 from backend.state_hub import CorridorStateHub, SpeedMultiplier
+from backend.vision_service import VisionStreamService
 from orchestrator.corridor_physics import ScenarioPreset
 from schemas.contracts import (
     JunctionID,
@@ -72,7 +74,31 @@ class SimControlResponse(BaseModel):
     message: str
 
 
+class VisionSnapshotResponse(BaseModel):
+    """Live CCTV + BEV Spatial Occupancy snapshot payload."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    frame_jpeg_b64: str
+    packet: JunctionStatePacket
+    ev_triggered: bool
+
+
+class PerceptionTriggerResponse(BaseModel):
+    """Response after triggering the 3D corridor race from live CCTV perception."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    status: str
+    scenario: ScenarioPreset
+    is_running: bool
+    forecast: SpillbackForecast
+    command: VerifiedSignalCommand
+
+
 hub = CorridorStateHub()
+vision_service = VisionStreamService()
+_vision_lock = asyncio.Lock()
 
 
 @asynccontextmanager
@@ -82,6 +108,7 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     try:
         yield
     finally:
+        vision_service.close()
         await hub.close()
 
 
@@ -187,6 +214,41 @@ async def run_sim_benchmark(
 ) -> dict[str, Any]:
     """Run a complete A/B episode and return Baseline EVP vs. AegisFlow KPIs."""
     return hub.run_benchmark(scenario=scenario, seed=seed, max_ticks=max_ticks)
+
+
+@app.get("/api/v1/perception/snapshot", response_model=VisionSnapshotResponse)
+async def get_perception_snapshot() -> VisionSnapshotResponse:
+    """Step the roadside perception node by 1 frame and return JPEG + packet."""
+    async with _vision_lock:
+        snapshot = await asyncio.to_thread(vision_service.step_snapshot)
+    return VisionSnapshotResponse(
+        frame_jpeg_b64=snapshot.frame_jpeg_b64,
+        packet=snapshot.packet,
+        ev_triggered=snapshot.ev_triggered,
+    )
+
+
+@app.post(
+    "/api/v1/perception/trigger-corridor",
+    response_model=PerceptionTriggerResponse,
+)
+async def trigger_corridor_from_perception() -> PerceptionTriggerResponse:
+    """Ingest latest CCTV packet and launch the peak_spillback emergency race."""
+    async with _vision_lock:
+        packet = await asyncio.to_thread(vision_service.get_latest_or_step_packet)
+
+    await hub.reset_simulation(scenario="peak_spillback")
+    await hub.inject_ev_alert_at_ja()
+    forecast, command = await hub.ingest_junction_state(packet)
+    await hub.start_simulation(scenario="peak_spillback")
+
+    return PerceptionTriggerResponse(
+        status="ok",
+        scenario=hub.scenario,
+        is_running=hub.is_running,
+        forecast=forecast,
+        command=command,
+    )
 
 
 @app.websocket("/ws/corridor")

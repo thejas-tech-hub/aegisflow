@@ -133,3 +133,28 @@ def test_corridor_websocket_streams_valid_ab_snapshot(tmp_path: Path) -> None:
         assert "J_C" in frame["aegisflow"]["states"]
     finally:
         hub.db_path = original_db
+
+
+def test_perception_snapshot_endpoint(tmp_path: Path) -> None:
+    """GET /api/v1/perception/snapshot returns 200 with JPEG b64 and CCTV packet."""
+    import base64
+
+    original_db = hub.db_path
+    hub.db_path = tmp_path / "test_telemetry.db"
+    try:
+        with TestClient(app) as client:
+            response = client.get("/api/v1/perception/snapshot")
+
+        assert response.status_code == 200
+        payload = response.json()
+        assert isinstance(payload["frame_jpeg_b64"], str)
+        assert len(payload["frame_jpeg_b64"]) > 100
+        decoded = base64.b64decode(payload["frame_jpeg_b64"])
+        assert decoded.startswith(b"\xff\xd8")
+
+        packet = JunctionStatePacket.model_validate(payload["packet"])
+        assert packet.source == "cctv"
+        assert packet.junction_id == JunctionID.J_A
+        assert isinstance(payload["ev_triggered"], bool)
+    finally:
+        hub.db_path = original_db

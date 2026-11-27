@@ -21,6 +21,7 @@ import {
   HelpWalkthroughView,
 } from "./components/SecondaryViews";
 import { Sidebar, type NavTabId } from "./components/Sidebar";
+import { VisionBevPanel } from "./components/VisionBevPanel";
 import { useCorridorSocket } from "./hooks/useCorridorSocket";
 import type {
   ScenarioPreset,
@@ -309,6 +310,12 @@ export function App() {
                 auditSummary={aegisKpis?.shield_audit_summary ?? null}
               />
             </>
+          ) : null}
+
+          {activeTab === "vision" ? (
+            <VisionBevPanel
+              onTriggeredCorridor={() => setActiveTab("dashboard")}
+            />
           ) : null}
 
           {activeTab === "corridor" ? (
