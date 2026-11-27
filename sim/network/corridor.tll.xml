@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    AegisFlow 3-junction urban arterial corridor – Traffic Light Logic
+
+    6-phase signal program applied identically to J_A, J_B, J_C.
+
+    Phase semantics:
+      1. NS_GREEN       – North-South through/right green   (30 s)
+      2. NS_YELLOW      – North-South yellow clearance       (3 s)
+      3. ALL_RED_TO_EW  – All-red interphase                 (2 s)
+      4. EW_GREEN       – East-West through/right green     (40 s)
+      5. EW_YELLOW      – East-West yellow clearance         (3 s)
+      6. ALL_RED_TO_NS  – All-red interphase                 (2 s)
+
+    State string order follows SUMO convention:
+      One character per connection, ordered by incoming edge index then lane.
+      For a 4-arm intersection with 2 lanes each, the edges are ordered by
+      angle (counterclockwise from south).  netconvert will reorder
+      connections at build time, so we let netconvert generate the actual
+      link indices and simply define phases with the standard NEMA-style
+      semantics.  We use "programID=0" so netconvert's auto-generated
+      connections map cleanly.
+
+    NOTE: netconvert will auto-generate connection-level phases from these
+    when the node type is "traffic_light".  The phase state strings below
+    assume the following connection ordering per junction (each junction is
+    symmetric):
+
+    For each junction with edges named *_to_J (incoming) in order:
+      Sorted by from-edge angle:  S-arm, W-arm, N-arm, E-arm
+      Each arm has 2 lanes × links (through, right).
+
+    Approximate connection count per junction: ~12 links
+    State characters: G=green, g=green-minor, y=yellow, r=red
+
+    We define a generic 12-link state string per phase below.
+    Link layout (by approach direction, 2 lanes each):
+      [0-3]   = South approach (NS direction)  – lanes 0,1 from S
+      [4-7]   = West approach  (EW direction)  – lanes 0,1 from W
+      [8-11]  = North approach (NS direction)  – lanes 0,1 from N
+      [12-15] = East approach  (EW direction)  – lanes 0,1 from E
+
+    This is a 16-character state to cover 4 approaches × 2 lanes × 2 moves.
+-->
+<tlLogics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tllogic_file.xsd">
+
+    <!--
+        Generic 6-phase program.
+        State chars map (16 connections):
+          Positions  0-3  : S-arm (NS)
+          Positions  4-7  : W-arm (EW)
+          Positions  8-11 : N-arm (NS)
+          Positions 12-15 : E-arm (EW)
+    -->
+
+    <!-- === Junction A === -->
+    <tlLogic id="J_A" type="static" programID="0" offset="0">
+        <!-- Phase 1: NS_GREEN -->
+        <phase duration="30" state="GGGGrrrrGGGGrrrr" name="NS_GREEN"/>
+        <!-- Phase 2: NS_YELLOW -->
+        <phase duration="3"  state="yyyyrrrryyyyrrrr" name="NS_YELLOW"/>
+        <!-- Phase 3: ALL_RED_TO_EW -->
+        <phase duration="2"  state="rrrrrrrrrrrrrrrr" name="ALL_RED_TO_EW"/>
+        <!-- Phase 4: EW_GREEN -->
+        <phase duration="40" state="rrrrGGGGrrrrGGGG" name="EW_GREEN"/>
+        <!-- Phase 5: EW_YELLOW -->
+        <phase duration="3"  state="rrrryyyyrrrryyyy" name="EW_YELLOW"/>
+        <!-- Phase 6: ALL_RED_TO_NS -->
+        <phase duration="2"  state="rrrrrrrrrrrrrrrr" name="ALL_RED_TO_NS"/>
+    </tlLogic>
+
+    <!-- === Junction B === -->
+    <tlLogic id="J_B" type="static" programID="0" offset="0">
+        <phase duration="30" state="GGGGrrrrGGGGrrrr" name="NS_GREEN"/>
+        <phase duration="3"  state="yyyyrrrryyyyrrrr" name="NS_YELLOW"/>
+        <phase duration="2"  state="rrrrrrrrrrrrrrrr" name="ALL_RED_TO_EW"/>
+        <phase duration="40" state="rrrrGGGGrrrrGGGG" name="EW_GREEN"/>
+        <phase duration="3"  state="rrrryyyyrrrryyyy" name="EW_YELLOW"/>
+        <phase duration="2"  state="rrrrrrrrrrrrrrrr" name="ALL_RED_TO_NS"/>
+    </tlLogic>
+
+    <!-- === Junction C === -->
+    <tlLogic id="J_C" type="static" programID="0" offset="0">
+        <phase duration="30" state="GGGGrrrrGGGGrrrr" name="NS_GREEN"/>
+        <phase duration="3"  state="yyyyrrrryyyyrrrr" name="NS_YELLOW"/>
+        <phase duration="2"  state="rrrrrrrrrrrrrrrr" name="ALL_RED_TO_EW"/>
+        <phase duration="40" state="rrrrGGGGrrrrGGGG" name="EW_GREEN"/>
+        <phase duration="3"  state="rrrryyyyrrrryyyy" name="EW_YELLOW"/>
+        <phase duration="2"  state="rrrrrrrrrrrrrrrr" name="ALL_RED_TO_NS"/>
+    </tlLogic>
+
+</tlLogics>
+

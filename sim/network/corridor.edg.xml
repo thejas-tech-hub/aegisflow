@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AegisFlow 3-junction urban arterial corridor – Edge definitions -->
+<edges xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/edges_file.xsd">
+
+    <!-- ================================================================
+         East-West ARTERIAL (bidirectional, 2 lanes, 50 km/h = 13.89 m/s)
+         ================================================================ -->
+    <!-- Westbound boundary → J_A -->
+    <edge id="W_to_A"  from="W_entry" to="J_A" numLanes="2" speed="13.89"/>
+    <edge id="A_to_W"  from="J_A" to="W_entry" numLanes="2" speed="13.89"/>
+
+    <!-- J_A → J_B -->
+    <edge id="A_to_B"  from="J_A" to="J_B" numLanes="2" speed="13.89"/>
+    <edge id="B_to_A"  from="J_B" to="J_A" numLanes="2" speed="13.89"/>
+
+    <!-- J_B → J_C -->
+    <edge id="B_to_C"  from="J_B" to="J_C" numLanes="2" speed="13.89"/>
+    <edge id="C_to_B"  from="J_C" to="J_B" numLanes="2" speed="13.89"/>
+
+    <!-- J_C → Eastbound boundary -->
+    <edge id="C_to_E"  from="J_C" to="E_exit" numLanes="2" speed="13.89"/>
+    <edge id="E_to_C"  from="E_exit" to="J_C" numLanes="2" speed="13.89"/>
+
+    <!-- ================================================================
+         North-South CROSS-STREETS (bidirectional, 2 lanes, 50 km/h)
+         ================================================================ -->
+    <!-- Junction A cross-street -->
+    <edge id="AN_to_A" from="A_N" to="J_A" numLanes="2" speed="13.89"/>
+    <edge id="A_to_AN" from="J_A" to="A_N" numLanes="2" speed="13.89"/>
+    <edge id="AS_to_A" from="A_S" to="J_A" numLanes="2" speed="13.89"/>
+    <edge id="A_to_AS" from="J_A" to="A_S" numLanes="2" speed="13.89"/>
+
+    <!-- Junction B cross-street -->
+    <edge id="BN_to_B" from="B_N" to="J_B" numLanes="2" speed="13.89"/>
+    <edge id="B_to_BN" from="J_B" to="B_N" numLanes="2" speed="13.89"/>
+    <edge id="BS_to_B" from="B_S" to="J_B" numLanes="2" speed="13.89"/>
+    <edge id="B_to_BS" from="J_B" to="B_S" numLanes="2" speed="13.89"/>
+
+    <!-- Junction C cross-street -->
+    <edge id="CN_to_C" from="C_N" to="J_C" numLanes="2" speed="13.89"/>
+    <edge id="C_to_CN" from="J_C" to="C_N" numLanes="2" speed="13.89"/>
+    <edge id="CS_to_C" from="C_S" to="J_C" numLanes="2" speed="13.89"/>
+    <edge id="C_to_CS" from="J_C" to="C_S" numLanes="2" speed="13.89"/>
+
+</edges>
+
