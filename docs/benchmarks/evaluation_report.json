@@ -1,0 +1,274 @@
+{
+  "n_seeds": 30,
+  "n_stress_seeds": 10,
+  "monte_carlo": {
+    "moderate_mixed": {
+      "Fixed-Time": {
+        "ev_travel_time_s": {
+          "mean": 184.6,
+          "std": 0.554
+        },
+        "ev_stopped_time_s": {
+          "mean": 117.6,
+          "std": 0.554
+        },
+        "peak_jb_queue_m": {
+          "mean": 121.861,
+          "std": 0.501
+        },
+        "spillback_ticks": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      },
+      "Isolated Local EVP": {
+        "ev_travel_time_s": {
+          "mean": 85.0,
+          "std": 0.0
+        },
+        "ev_stopped_time_s": {
+          "mean": 18.0,
+          "std": 0.0
+        },
+        "peak_jb_queue_m": {
+          "mean": 159.316,
+          "std": 0.497
+        },
+        "spillback_ticks": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      },
+      "AegisFlow v2.0": {
+        "ev_travel_time_s": {
+          "mean": 67.0,
+          "std": 0.0
+        },
+        "ev_stopped_time_s": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "peak_jb_queue_m": {
+          "mean": 100.816,
+          "std": 0.2
+        },
+        "spillback_ticks": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      }
+    },
+    "peak_spillback": {
+      "Fixed-Time": {
+        "ev_travel_time_s": {
+          "mean": 259.933,
+          "std": 0.512
+        },
+        "ev_stopped_time_s": {
+          "mean": 192.933,
+          "std": 0.512
+        },
+        "peak_jb_queue_m": {
+          "mean": 230.837,
+          "std": 0.483
+        },
+        "spillback_ticks": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      },
+      "Isolated Local EVP": {
+        "ev_travel_time_s": {
+          "mean": 112.8,
+          "std": 0.4
+        },
+        "ev_stopped_time_s": {
+          "mean": 45.8,
+          "std": 0.4
+        },
+        "peak_jb_queue_m": {
+          "mean": 277.971,
+          "std": 0.476
+        },
+        "spillback_ticks": {
+          "mean": 18.0,
+          "std": 0.0
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      },
+      "AegisFlow v2.0": {
+        "ev_travel_time_s": {
+          "mean": 71.0,
+          "std": 0.0
+        },
+        "ev_stopped_time_s": {
+          "mean": 4.0,
+          "std": 0.0
+        },
+        "peak_jb_queue_m": {
+          "mean": 198.137,
+          "std": 0.201
+        },
+        "spillback_ticks": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      }
+    },
+    "severe_gridlock": {
+      "Fixed-Time": {
+        "ev_travel_time_s": {
+          "mean": 300.0,
+          "std": 0.0
+        },
+        "ev_stopped_time_s": {
+          "mean": 272.0,
+          "std": 0.0
+        },
+        "peak_jb_queue_m": {
+          "mean": 267.672,
+          "std": 0.87
+        },
+        "spillback_ticks": {
+          "mean": 68.267,
+          "std": 2.351
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      },
+      "Isolated Local EVP": {
+        "ev_travel_time_s": {
+          "mean": 300.0,
+          "std": 0.0
+        },
+        "ev_stopped_time_s": {
+          "mean": 252.433,
+          "std": 3.052
+        },
+        "peak_jb_queue_m": {
+          "mean": 300.0,
+          "std": 0.0
+        },
+        "spillback_ticks": {
+          "mean": 95.267,
+          "std": 4.381
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      },
+      "AegisFlow v2.0": {
+        "ev_travel_time_s": {
+          "mean": 86.0,
+          "std": 0.0
+        },
+        "ev_stopped_time_s": {
+          "mean": 19.0,
+          "std": 0.0
+        },
+        "peak_jb_queue_m": {
+          "mean": 228.153,
+          "std": 0.218
+        },
+        "spillback_ticks": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "safety_violations": 0,
+        "n_episodes": 30
+      }
+    }
+  },
+  "fault_injection": {
+    "AegisFlow (Clean)": {
+      "ev_travel_time_s": {
+        "mean": 71.0,
+        "std": 0.0
+      },
+      "ev_stopped_time_s": {
+        "mean": 4.0,
+        "std": 0.0
+      },
+      "peak_jb_queue_m": {
+        "mean": 198.142,
+        "std": 0.216
+      },
+      "spillback_ticks": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "safety_violations": 0,
+      "n_episodes": 10
+    },
+    "AegisFlow (+/-15% Noise)": {
+      "ev_travel_time_s": {
+        "mean": 71.0,
+        "std": 0.0
+      },
+      "ev_stopped_time_s": {
+        "mean": 4.0,
+        "std": 0.0
+      },
+      "peak_jb_queue_m": {
+        "mean": 198.142,
+        "std": 0.216
+      },
+      "spillback_ticks": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "safety_violations": 0,
+      "n_episodes": 10
+    },
+    "AegisFlow (30% Packet Drop)": {
+      "ev_travel_time_s": {
+        "mean": 71.1,
+        "std": 0.3
+      },
+      "ev_stopped_time_s": {
+        "mean": 4.1,
+        "std": 0.3
+      },
+      "peak_jb_queue_m": {
+        "mean": 198.302,
+        "std": 0.468
+      },
+      "spillback_ticks": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "safety_violations": 0,
+      "n_episodes": 10
+    },
+    "Baseline EVP (Clean)": {
+      "ev_travel_time_s": {
+        "mean": 112.7,
+        "std": 0.458
+      },
+      "ev_stopped_time_s": {
+        "mean": 45.7,
+        "std": 0.458
+      },
+      "peak_jb_queue_m": {
+        "mean": 277.897,
+        "std": 0.708
+      },
+      "spillback_ticks": {
+        "mean": 18.0,
+        "std": 0.0
+      },
+      "safety_violations": 0,
+      "n_episodes": 10
+    }
+  }
+}
