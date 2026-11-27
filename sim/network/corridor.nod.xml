@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AegisFlow 3-junction urban arterial corridor – Node definitions -->
+<nodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/nodes_file.xsd">
+
+    <!-- === Signalised junctions (arterial intersections) === -->
+    <node id="J_A" x="0.0"   y="0.0" type="traffic_light"/>
+    <node id="J_B" x="300.0" y="0.0" type="traffic_light"/>
+    <node id="J_C" x="600.0" y="0.0" type="traffic_light"/>
+
+    <!-- === Dead-end boundary nodes for the arterial === -->
+    <node id="W_entry" x="-300.0" y="0.0" type="dead_end"/>
+    <node id="E_exit"  x="900.0"  y="0.0" type="dead_end"/>
+
+    <!-- === Dead-end boundary nodes for N-S cross-streets === -->
+    <!-- Junction A cross-street -->
+    <node id="A_N" x="0.0"   y="250.0"  type="dead_end"/>
+    <node id="A_S" x="0.0"   y="-250.0" type="dead_end"/>
+
+    <!-- Junction B cross-street -->
+    <node id="B_N" x="300.0" y="250.0"  type="dead_end"/>
+    <node id="B_S" x="300.0" y="-250.0" type="dead_end"/>
+
+    <!-- Junction C cross-street -->
+    <node id="C_N" x="600.0" y="250.0"  type="dead_end"/>
+    <node id="C_S" x="600.0" y="-250.0" type="dead_end"/>
+
+</nodes>
+
